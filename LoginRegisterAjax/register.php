@@ -7,7 +7,7 @@
     <title>Inscription</title>
 </head>
 <body>
-    <h2>Register</h2>
+    <h2>Inscription</h2>
     <form autocomplete="off" action="" method="post">
       <input type="hidden" id="action" value="register">
       <label for="">Nom</label>
