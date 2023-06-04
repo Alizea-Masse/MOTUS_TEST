@@ -25,6 +25,7 @@ if(isset($_SESSION["id"])){
       <input type="text" id="username" value=""> <br>
       <label for="">Mot de passe</label>
       <input type="password" id="password" value=""> <br>
+      <div id="message"></div>
       <button type="button" onclick="submitData();">S'inscrire</button>
     </form>
     <br>

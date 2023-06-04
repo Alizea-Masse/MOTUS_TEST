@@ -10,6 +10,10 @@ if(isset($_POST["action"])){
     else if($_POST["action"] == "login"){
       login();
     }
+    else if($_POST["action"] == "score"){
+      addScore();
+    }
+    
   }
 
   // REGISTER
@@ -21,13 +25,13 @@ function register(){
     $password = $_POST["password"];
   
     if(empty($name) || empty($username) || empty($password)){
-      echo "Please Fill Out The Form!";
+      echo "Veuillez remplir tous les champs!";
       exit;
     }
   
     $user = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username'");
     if(mysqli_num_rows($user) > 0){
-      echo "Username Has Already Taken";
+      echo "Nom d'utilisateur déjà utilisé";
       exit;
     }
   
@@ -55,14 +59,21 @@ function login(){
         $_SESSION["id"] = $row["id"];
       }
       else{
-        echo "Wrong Password";
+        echo "Mot de passe ou nom d'utilisateur incorrect";
         exit;
       }
     }
     else{
-      echo "User Not Registered";
+      echo "Utilisateur non inscrit";
       exit;
     }
   }
 
-?>
+// ADD BEST SCORE 
+function addScore(){
+  echo "coucou";
+  global $conn;
+  $score = $_POST["score"];
+  $query = "INSERT INTO tb_user VALUES('', '', '', '$score')";
+  mysqli_query($conn, $query);
+}

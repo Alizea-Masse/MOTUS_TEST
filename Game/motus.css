@@ -6,11 +6,24 @@ body {
     align-items: center;
 }
 
+.welcome {
+  color: white;
+  font-size: 2em;
+  margin-top: 1em;
+}
+
   #board {
-    min-height: 65vh;
+    min-height: 55vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  .board-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
   }
   
   .row {
@@ -83,14 +96,12 @@ body {
   }
   
 
-h2{
-    color: white;
-}
+
 
 .logo {
     margin-top: 2em;
     width: 30vw;
-    height: 20vh;
+    height: 13vh;
 }
 
 form {
@@ -166,7 +177,27 @@ input {
   }
 
   .logout-link {
-  margin-top: 2em;
+  margin-top: 3em;
   text-decoration: none;
   color: white;
+  }
+
+  #score {
+    color: white;
+  }
+
+  .rules {
+    border-radius: 15px;
+    color: white;
+    padding: 1em;
+    margin-top: 2em;
+    background-color: #e7464667;
+  }
+
+  .rules-title {
+    margin-bottom: .5em;
+  }
+
+  li {
+    margin-bottom: .3em;
   }

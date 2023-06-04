@@ -15,7 +15,7 @@ if(isset($_SESSION["id"])){
 </head>
 <body>
 <img class="logo" src="./motus_logo_2010.png" alt="Logo">
-<h2>Envie de jouer à motus ? Connectez vous !</h2>
+<h2>Envie de jouer à Motus ? Connectez vous !</h2>
 
     <form autocomplete="off" action="" method="post">
       <input type="hidden" id="action" value="login">

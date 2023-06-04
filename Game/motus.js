@@ -1,6 +1,10 @@
+
+
 let game;
 class Game {
   constructor() {
+    this.user
+    this.score = 0
     this.running = true;
     this.word = "";
     this.position = 1;
@@ -11,10 +15,13 @@ class Game {
     this.fetchWord(() => {
       this.drawboard()
     })
+    
   }
 
   drawboard() {
     this.board = document.getElementById("board");
+    const score = document.getElementById("score")
+    score.innerHTML = `Score : ${this.score} `
     // de la création d'une ligne
     for (let counterRow = 0; counterRow < 6; counterRow++) {
       const rowElement = document.createElement("div");
@@ -35,8 +42,8 @@ class Game {
     this.generateLetterArray()
     this.writePoints()
     this.writeLetter(this.word[0], "goodPlace", "cell0-0");
-    //console.log(letterArray)
   }
+
 
   writePoints() {
     for (let index = 1; index < this.word.length; index++) {
@@ -45,7 +52,6 @@ class Game {
       if (this.letterArray[index] == true) {
         LineCells.innerHTML = ""
       }
-      //console.log(LineCells)
     }
   }
 
@@ -62,11 +68,6 @@ class Game {
     this.letterArray[0] = true;
   }
 
-
-  generateLetterArray() {
-    this.letterArray = Array.from({ length: this.word.length }, (i) => (i = false));
-    this.letterArray[0] = true;
-  }
 
   addLetter(letter) {
     const cell = "cell" + this.round + "-" + this.position;
@@ -99,7 +100,6 @@ class Game {
     this.position = this.letterArray.indexOf(false);
 
     if (this.position === -1) {
-
       this.win()
       return
 
@@ -116,9 +116,6 @@ class Game {
         this.writeLetter(this.word[index], "goodPlace", cell);
       }
     }
-    
-    
-    //console.log(position)
   }
 
   fetchWord(callback) {
@@ -131,8 +128,9 @@ class Game {
       });
   }
 
+
+
   win() {
-    //console.log('win')
     const id = this.round - 1
     for (let index = 0; index < this.letterArray.length; index++) {
       let cell = document.getElementById(`cell${id}-${index}`)
@@ -144,30 +142,61 @@ class Game {
     for (let index = this.round ; index < 6; index++) {
       let emptyRows = document.getElementById(`row${index}`)
       let rowsChildren = emptyRows.children
-      console.log(rowsChildren)
+     
 
       for (let item of rowsChildren) {
         item.classList.add('empty')
 
       }
-
-      this.running = false
       
-     // le mot s'écrit sur toutes les lignes
-
+      // le mot s'écrit sur toutes les lignes
+      
     }
+    this.running = false
+    setTimeout(() => {
+      
+      this.newGame()
+    }, 4000);
+   
   }
 
   lose() {
+
+    const bestScore = this.score
+    //console.log(bestScore)
     this.running = false
+    this.submitScore()
     setTimeout(() => {
       game = new Game()
     }, 500);
-    console.log('lose')
   }
+
+  newGame() {
+    this.board.innerHTML = "";
+    this.score ++
+    this.running = true;
+    this.word = "";
+    this.position = 1;
+    this.round = 0;
+    this.letterArray;
+    this.fetchWord(() => {
+      this.drawboard()
+    })
+
+    const score = document.getElementById("score")
+    score.innerHTML = `Score : ${this.score} `
+
+  }
+
+  submitScore() {
+    window.location.href = `index.php?score=${this.score}`;
+  };
+  
 
 
 }
+
+
 
 
 document.addEventListener("keydown", function (event) {
@@ -182,3 +211,4 @@ document.addEventListener("keydown", function (event) {
     game = new Game()
   
   });
+
