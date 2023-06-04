@@ -42,6 +42,9 @@ class Game {
     for (let index = 1; index < this.word.length; index++) {
       let LineCells = document.getElementById(`cell${this.round}-${index}`)
       LineCells.innerHTML = "."
+      if (this.letterArray[index] == true) {
+        LineCells.innerHTML = ""
+      }
       //console.log(LineCells)
     }
   }
@@ -92,7 +95,7 @@ class Game {
   newRound() {
     this.round++;
     //console.log(position);
-    this.writePoints()
+   
     this.position = this.letterArray.indexOf(false);
 
     if (this.position === -1) {
@@ -106,12 +109,14 @@ class Game {
       return
 
     } 
+    this.writePoints()
     for (let index = 0; index < this.letterArray.length; index++) {
       if (this.letterArray[index] == true) {
         const cell = "cell" + this.round + "-" + index;
         this.writeLetter(this.word[index], "goodPlace", cell);
       }
     }
+    
     
     //console.log(position)
   }
