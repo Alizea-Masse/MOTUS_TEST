@@ -11,7 +11,7 @@ else{
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="motus.css">
     <meta charset="utf-8">
     <title>Motus</title>
   </head>
