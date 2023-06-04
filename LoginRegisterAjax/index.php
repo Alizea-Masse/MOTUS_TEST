@@ -11,11 +11,15 @@ else{
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link rel="stylesheet" href="register.css">
     <meta charset="utf-8">
-    <title>Index</title>
+    <title>Motus</title>
   </head>
   <body>
-    <h1>Bienvenue <?php echo $user["name"]; ?></h1>
-    <a href="logout.php">Se déconnecter</a>
+      <div class="header-container">
+          <h2>Bienvenue <?php echo $user["name"]; ?> !</h2>
+          <a class="logout-link" href="logout.php">Se déconnecter</a>
+        </div>
+        <img class="logo" src="../motus_logo_2010.png" alt="Logo">
   </body>
 </html>

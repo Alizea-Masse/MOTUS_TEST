@@ -2,7 +2,7 @@
 <script type="text/javascript">
   function submitData(){
     $(document).ready(function(){
-      let data = {
+      var data = {
         name: $("#name").val(),
         username: $("#username").val(),
         password: $("#password").val(),
@@ -14,9 +14,12 @@
         type: 'post',
         data: data,
         success:function(response){
-          alert(response);
+          //console.log(response);
           if(response == "Login Successful"){
             window.location.reload();
+          } else if (response == "Registration Successful"){
+            $(location).attr('href','login.php');
+            console.log("coucou")
           }
         }
       });
