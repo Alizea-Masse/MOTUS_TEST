@@ -20,6 +20,10 @@ else{
           <h2>Bienvenue <?php echo $user["name"]; ?> !</h2>
           <a class="logout-link" href="logout.php">Se déconnecter</a>
         </div>
-        <img class="logo" src="../LoginRegisterAjax/motus_logo_2010.png" alt="Logo">
+        <img class="logo" src="./motus_logo_2010.png" alt="Logo">
+        <div id='board'>
+
+        </div>
   </body>
+  <script src="./motus.js"></script>
 </html>

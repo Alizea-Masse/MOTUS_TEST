@@ -19,7 +19,7 @@
             window.location.reload();
           } else if (response == "Registration Successful"){
             $(location).attr('href','login.php');
-            console.log("coucou")
+            //console.log("coucou")
           }
         }
       });
