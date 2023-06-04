@@ -14,7 +14,7 @@ if(isset($_SESSION["id"])){
     <title>Connexion</title>
 </head>
 <body>
-<img class="logo" src="../motus_logo_2010.png" alt="Logo">
+<img class="logo" src="../LoginRegisterAjax/motus_logo_2010.png" alt="Logo">
 <h2>Envie de jouer à motus ? Connectez vous !</h2>
 
     <form autocomplete="off" action="" method="post">
