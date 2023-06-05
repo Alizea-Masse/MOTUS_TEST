@@ -14,7 +14,6 @@ else{
 <html lang="en" dir="ltr">
   <head>
   <link rel="stylesheet" href="reset.css">
-
     <link rel="stylesheet" href="motus.css">
     <meta charset="utf-8">
     <title>Motus</title>
@@ -41,6 +40,7 @@ else{
           <div id="score"></div>
           <div id='board'></div> 
         </div>
+        <div id="fame"></div>
   </body> 
   <script type="module" src="../index.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

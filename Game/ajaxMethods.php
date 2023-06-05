@@ -90,3 +90,13 @@ function addScore()
     mysqli_query($conn, $query);
   }
 }
+
+// getBestScore
+
+function getBestScore()
+{
+  $bdd = new PDO('mysql:host=localhost;dbname=motus;charset=utf8;', 'root', '');
+  $wall = $bdd->query('SELECT username, best_score FROM tb_user ORDER BY best_score DESC LIMIT 5');
+  $result = $wall->fetchAll(PDO::FETCH_NAMED);
+  echo json_encode($result);
+}

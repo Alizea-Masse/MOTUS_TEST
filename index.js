@@ -1,5 +1,6 @@
 import Game from './Game/motus.js'
 
+
 let game;
 
 document.addEventListener("keydown", function (event) {
