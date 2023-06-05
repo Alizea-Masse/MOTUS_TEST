@@ -1,5 +1,5 @@
 <?php
-require 'function.php';
+require 'ajaxMethods.php';
 $_SESSION = [];
 session_unset();
 session_destroy();

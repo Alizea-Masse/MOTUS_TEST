@@ -1,5 +1,5 @@
 <?php
-require 'function.php';
+require 'ajaxMethods.php';
 if(isset($_SESSION["id"])){
   header("Location: index.php");
 }

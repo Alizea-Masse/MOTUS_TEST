@@ -1,7 +1,8 @@
 
 
-let game;
-class Game {
+
+export default class Game {
+
   constructor(score) {
     this.user
     this.score = score
@@ -12,9 +13,7 @@ class Game {
     this.letterArray;
     this.board = document.getElementById("board");
     this.board.innerHTML = "";
-    this.fetchWord(() => {
-      this.drawboard()
-    })
+    this.getWord().then((word)=>{this.word = word ; this.drawboard()})
     
   }
 
@@ -118,14 +117,16 @@ class Game {
     }
   }
 
-  fetchWord(callback) {
-    fetch('randomWord.php')
-      .then((response) => response.json())
-      .then((word) => {
-        this.word = word;
-        callback()
-        console.log(word)
-      });
+  getWord() {
+   return $.ajax({
+      method: "POST",
+      url: "ajaxMethods.php",
+      data: { action: "getWord" },
+      success: function(word) {
+        this.word = word
+      }
+    }) 
+
   }
 
 
@@ -166,8 +167,14 @@ class Game {
     //console.log(bestScore)
     this.running = false
     this.submitScore()
+    this.clearGame()
+
+  }
+
+  clearGame(){
     setTimeout(() => {
-      game = new Game(0)
+      const boardContainer = document.querySelector('.board-container')
+      boardContainer.innerHTML = ''
     }, 500);
   }
 
@@ -176,7 +183,7 @@ class Game {
   submitScore() {
     $.ajax({
       method: "POST",
-      url: "function.php",
+      url: "ajaxMethods.php",
       data: { action: "addScore", score: this.score }
     })
   };
@@ -188,16 +195,5 @@ class Game {
 
 
 
-document.addEventListener("keydown", function (event) {
-    if (event.key.length === 1 && event.key.match(/[a-z]/i) && game.running) {
-      game.addLetter(event.key.toUpperCase());
-    }
-  })
-  
-  
-  window.addEventListener("DOMContentLoaded", (event) => {
-  
-    game = new Game(0)
-  
-  });
+
 

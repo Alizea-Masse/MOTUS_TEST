@@ -1,9 +1,6 @@
 body {
     font-family: sans-serif;
-    display: flex;
-    background-color: #C62612;
-    flex-direction: column;
-    align-items: center;
+    background-color: #C62612; 
 }
 
 .welcome {
@@ -20,9 +17,10 @@ body {
   }
 
   .board-container {
+    margin-top: 4em;
     display: flex;
-    flex-direction: column;
-    gap: 1em;
+    justify-content: space-around;
+    width: 85vw;
 
   }
   
@@ -57,7 +55,7 @@ body {
   
   .badPlaceButInside>span {
     display: flex;
-    background-color: #FFE69E;
+    background-color: #e6d816;
     width: 100%;
     height: 100%;
     border-radius: 100%;
@@ -171,9 +169,11 @@ input {
   }
 
   .header-container {
-    width: 80vw;
+    width: 100vw;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: space-around;
+   
   }
 
   .logout-link {
@@ -186,18 +186,22 @@ input {
     color: white;
   }
 
-  .rules {
+  .rules-container {
+    
     border-radius: 15px;
     color: white;
     padding: 1em;
     margin-top: 2em;
     background-color: #e7464667;
+    width: 35vw;
+    height: 20vh;
+    font-weight: bold;
   }
 
   .rules-title {
-    margin-bottom: .5em;
+    margin-bottom: 1em;
   }
 
   li {
-    margin-bottom: .3em;
+    margin-bottom: 1em;
   }

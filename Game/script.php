@@ -10,7 +10,7 @@
       };
 
       $.ajax({
-        url: 'function.php',
+        url: 'ajaxMethods.php',
         type: 'post',
         data: data,
         success: function(response) {

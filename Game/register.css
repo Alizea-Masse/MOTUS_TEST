@@ -11,13 +11,13 @@ h2{
 }
 
 .logo {
-    width: 30vw;
+    width: 25vw;
     height: 20vh;
 }
 
 form {
     border-radius: 20px;
-    padding:4em;
+    padding:2em;
     display: flex;
     flex-direction: column;
     background-color: #0277C7;
