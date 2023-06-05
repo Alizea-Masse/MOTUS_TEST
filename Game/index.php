@@ -9,17 +9,6 @@ else{
   header("Location: login.php");
 }
 
-function getScore() {
-  global $conn;
-  
-  if (isset($_GET["score"]) ) {
-  $id = $_SESSION["id"];
-   $score = $_GET["score"] ;
-   $query = "UPDATE tb_user SET best_score= $score WHERE id= $id";
-   mysqli_query($conn, $query);
-  }
-}
-getScore()
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

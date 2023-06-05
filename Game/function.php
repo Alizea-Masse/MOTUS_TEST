@@ -2,18 +2,16 @@
 session_start();
 $conn = mysqli_connect("localhost", "root", "", "motus");
 
+
+
+
 // IF
 if(isset($_POST["action"])){
-    if($_POST["action"] == "register"){
-      register();
-    }
-    else if($_POST["action"] == "login"){
-      login();
-    }
-    else if($_POST["action"] == "score"){
-      addScore();
-    }
-    
+
+  if (function_exists($_POST["action"])) {
+    $_POST["action"]();
+  }
+   
   }
 
   // REGISTER
@@ -71,9 +69,10 @@ function login(){
 
 // ADD BEST SCORE 
 function addScore(){
-  echo "coucou";
+  //echo "coucou";
   global $conn;
+  $id = $_SESSION["id"];
   $score = $_POST["score"];
-  $query = "INSERT INTO tb_user VALUES('', '', '', '$score')";
+  $query = "UPDATE tb_user SET best_score= $score WHERE id= $id";
   mysqli_query($conn, $query);
 }

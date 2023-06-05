@@ -2,9 +2,9 @@
 
 let game;
 class Game {
-  constructor() {
+  constructor(score) {
     this.user
-    this.score = 0
+    this.score = score
     this.running = true;
     this.word = "";
     this.position = 1;
@@ -155,7 +155,7 @@ class Game {
     this.running = false
     setTimeout(() => {
       
-      this.newGame()
+      game = new Game(this.score + 1)
     }, 4000);
    
   }
@@ -167,29 +167,18 @@ class Game {
     this.running = false
     this.submitScore()
     setTimeout(() => {
-      game = new Game()
+      game = new Game(0)
     }, 500);
   }
 
-  newGame() {
-    this.board.innerHTML = "";
-    this.score ++
-    this.running = true;
-    this.word = "";
-    this.position = 1;
-    this.round = 0;
-    this.letterArray;
-    this.fetchWord(() => {
-      this.drawboard()
-    })
 
-    const score = document.getElementById("score")
-    score.innerHTML = `Score : ${this.score} `
-
-  }
 
   submitScore() {
-    window.location.href = `index.php?score=${this.score}`;
+    $.ajax({
+      method: "POST",
+      url: "function.php",
+      data: { action: "addScore", score: this.score }
+    })
   };
   
 
@@ -208,7 +197,7 @@ document.addEventListener("keydown", function (event) {
   
   window.addEventListener("DOMContentLoaded", (event) => {
   
-    game = new Game()
+    game = new Game(0)
   
   });
 
