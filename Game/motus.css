@@ -1,6 +1,6 @@
 body {
-    font-family: sans-serif;
-    background-color: #C62612; 
+  font-family: sans-serif;
+  background-color: #C62612;
 }
 
 .welcome {
@@ -13,221 +13,205 @@ body {
   background-color: #e6d816;
   padding: 1em;
   border-radius: 10px;
-  
+
 }
 
-  #board {
-    min-height: 55vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+#board {
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#board-container {
+  margin-top: 4em;
+  display: flex;
+  justify-content: space-around;
+  width: 85vw;
+
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 70px;
+  background-color: #0277C7;
+  border: 1px solid white;
+  font-size: 3em;
+  color: white;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.goodPlace {
+  background-color: red;
+}
+
+.badPlaceButInside {
+  background-color: #0277C7;
+}
+
+.badPlaceButInside>span {
+  display: flex;
+  background-color: #e6d816;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.badPlace {
+  background-color: #0277C7;
+}
+
+.win {
+  animation-duration: .3s;
+  animation-name: clignoter;
+  animation-iteration-count: 5;
+  transition: none;
+}
+
+@keyframes clignoter {
+  0% {
+    opacity: 1;
   }
 
-  #board-container {
-    margin-top: 4em;
-    display: flex;
-    justify-content: space-around;
-    width: 85vw;
+  100% {
+    opacity: 0;
+  }
+}
 
-  }
-  
-  .row {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .cell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 70px;
-    height: 70px;
-    background-color: #0277C7;
-    border: 1px solid white;
-    font-size: 3em;
-    color: white;
-    font-weight: bold;
-    font-family: sans-serif;
-  }
-  
-  
-  
-  .goodPlace {
-    background-color: red;
-  }
-  
-  .badPlaceButInside {
-    background-color: #0277C7;
-  }
-  
-  .badPlaceButInside>span {
-    display: flex;
-    background-color: #e6d816;
-    width: 100%;
-    height: 100%;
-    border-radius: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .badPlace {
-    background-color: #0277C7;
-  
-  
-  }
-  
-  .win {
-    animation-duration: .3s;
-    animation-name: clignoter;
-    animation-iteration-count: 5;
-    transition: none;
-  }
-  
-  @keyframes clignoter {
-    0% {
-      opacity: 1;
-    }
-  
-    100% {
-      opacity: 0;
-    }
-  
-  
-  }
-  
-  .empty {
-    background-color: grey;
-  
-  }
-  
-
-
+.empty {
+  background-color: grey;
+}
 
 .logo {
-    margin-top: 2em;
-    width: 20vw;
-    height: 13vh;
+  margin-top: 2em;
+  width: 20vw;
+  height: 13vh;
 }
 
 form {
-    border-radius: 20px;
-    padding:4em;
-    display: flex;
-    flex-direction: column;
-    background-color: #0277C7;
+  border-radius: 20px;
+  padding: 4em;
+  display: flex;
+  flex-direction: column;
+  background-color: #0277C7;
 }
 
 input {
-    
-    border-radius: 12px;
-    border: 0;
-    box-sizing: border-box;
-    
-    font-size: 18px;
-    height: 100%;
-    outline: 0;
-    padding: 4px 20px 5px;
-    width: 100%;
-    margin-top: 10px;
-  }
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  font-size: 18px;
+  height: 100%;
+  outline: 0;
+  padding: 4px 20px 5px;
+  width: 100%;
+  margin-top: 10px;
+}
 
-  label {
-    color: white;
-  }
+label {
+  color: white;
+}
 
-  .message-link {
-    font-size: .9em;
-    color: white;
-    text-decoration: none;
-  }
+.message-link {
+  font-size: .9em;
+  color: white;
+  text-decoration: none;
+}
 
 
 
-  button {
-    margin-top: 2em;
-    background-color: #e6d816;
-    border-radius: 12px;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    padding: 10px 15px;
-    text-align: center;
-    transition: 200ms;
-    width: 100%;
-    box-sizing: border-box;
-    border: 0;
-    font-size: 16px;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-  
-  button:not(:disabled):hover,
-  button:not(:disabled):focus {
-    outline: 0;
-    background: #f4e603;
-    box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
-  }
-  
-  button:disabled {
-    filter: saturate(0.2) opacity(0.5);
-    -webkit-filter: saturate(0.2) opacity(0.5);
-    cursor: not-allowed;
-  }
+button {
+  margin-top: 2em;
+  background-color: #e6d816;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
 
-  .header-container {
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-   
-  }
+button:not(:disabled):hover,
+button:not(:disabled):focus {
+  outline: 0;
+  background: #f4e603;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, .2), 0 3px 8px 0 rgba(0, 0, 0, .15);
+}
 
-  .logout-link {
+button:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
+}
+
+.header-container {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+}
+
+.logout-link {
   margin-top: 3em;
   text-decoration: none;
   color: white;
-  }
+}
 
-  #score {
-    color: white;
-  }
-
-  .rules-container {
-    
-    border-radius: 15px;
-    color: white;
-    padding: 1em;
-    margin-top: 2em;
-    background-color: #e7464667;
-    width: 35vw;
-    height: 20vh;
-    font-weight: bold;
-  }
-
-  .rules-title {
-    margin-bottom: 1em;
-  }
-
-  li {
-    margin-bottom: 1em;
-  }
-
-
-
-th, td{
+#score {
   color: white;
-    padding: 10px 20px;
-    border: 2px solid white;
-    background-color: #0277C7;
-    font-weight: bold;
-    
+}
+
+.rules-container {
+  border-radius: 15px;
+  color: white;
+  padding: 1em;
+  margin-top: 2em;
+  background-color: #e7464667;
+  width: 35vw;
+  height: 20vh;
+  font-weight: bold;
+}
+
+.rules-title {
+  margin-bottom: 1em;
+}
+
+li {
+  margin-bottom: 1em;
+}
+
+th,
+td {
+  color: white;
+  padding: 10px 20px;
+  border: 2px solid white;
+  background-color: #0277C7;
+  font-weight: bold;
 }
 
 td {
   text-align: center;
   padding-top: 1.3em;
-  
 }
 
 #fame {

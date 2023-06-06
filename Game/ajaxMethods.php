@@ -4,7 +4,6 @@ $conn = mysqli_connect("localhost", "root", "", "motus");
 
 // IF
 if (isset($_POST["action"])) {
-
   if (function_exists($_POST["action"])) {
     $_POST["action"]();
   }
@@ -18,10 +17,7 @@ function register()
   $name = $_POST["name"];
   $username = $_POST["username"];
   $password = $_POST["password"];
-  
   $hashPassword = password_hash($password, PASSWORD_BCRYPT);
-
-
 
   if (empty($name) || empty($username) || empty($password)) {
     echo "Veuillez remplir tous les champs!";
@@ -40,22 +36,21 @@ function register()
 }
 
 // LOGIN
+
 function login()
 {
   global $conn;
 
   $username = $_POST["username"];
   $password = $_POST["password"];
- 
-
 
   $user = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username'");
 
   if (mysqli_num_rows($user) > 0) {
 
     $row = mysqli_fetch_assoc($user);
-    
-    if (password_verify( $password, $row['password'] )) {
+
+    if (password_verify($password, $row['password'])) {
       echo "Login Successful";
       $_SESSION["login"] = true;
       $_SESSION["id"] = $row["id"];
@@ -86,6 +81,7 @@ function getWord()
 // ADD BEST SCORE 
 function addScore()
 {
+
   global $conn;
   $id = $_SESSION["id"];
   $score = $_POST["score"];
@@ -101,6 +97,7 @@ function addScore()
 
 function getBestScore()
 {
+
   $bdd = new PDO('mysql:host=localhost;dbname=motus;charset=utf8;', 'root', '');
   $wall = $bdd->query('SELECT username, best_score FROM tb_user ORDER BY best_score DESC LIMIT 5');
   $result = $wall->fetchAll(PDO::FETCH_NAMED);

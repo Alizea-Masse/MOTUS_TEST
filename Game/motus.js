@@ -15,11 +15,8 @@ export default class Game {
     this.position = 1;
     this.round = 0;
     this.letterArray;
-    
-    
-    
     this.board.innerHTML = "";
-    this.getWord().then((word) => { this.word = word; this.drawboard(); console.log(this.word) })
+    this.getWord().then((word) => { this.word = word; this.drawboard()})
     this.fame = document.getElementById("fame");
     this.wall = []
   }
@@ -29,6 +26,7 @@ export default class Game {
     this.board = document.getElementById("board");
     const score = document.getElementById("score")
     score.innerHTML = `Score : ${this.score} `
+
     // de la création d'une ligne
     for (let counterRow = 0; counterRow < 6; counterRow++) {
       const rowElement = document.createElement("div");
@@ -49,9 +47,6 @@ export default class Game {
     this.generateLetterArray()
     this.writePoints()
     this.writeLetter(this.word[0], "goodPlace", "cell0-0");
-
-    //this.getBestScore().then((wall)=>{this.wall = wall ;  this.drawFame()})
-
   }
 
 
@@ -63,7 +58,6 @@ export default class Game {
         LineCells.innerHTML = ""
       }
     }
-
   }
 
   writeLetter(letter, className, id) {
@@ -160,8 +154,6 @@ export default class Game {
 
       }
 
-      // le mot s'écrit sur toutes les lignes
-
     }
     this.running = false
     setTimeout(() => {
@@ -171,16 +163,12 @@ export default class Game {
   }
 
   lose() {
-    
     this.running = false
     this.submitScore()
     this.clearGame()
     setTimeout(() => {
       this.getBestScore().then((wall) => { this.wall = wall; this.drawFame() })
     }, 900);
-
-
-
   }
 
   clearGame() {
@@ -192,20 +180,14 @@ export default class Game {
 
 
   getBestScore() {
-
     return $.ajax({
       method: "POST",
       url: "ajaxMethods.php",
       data: { action: "getBestScore" },
-      //  success: function(wall) {
-      //    this.wall = wall
-      //  }
     })
-
   }
 
   drawFame() {
-
     const bestScoreJsonArray = this.wall
     const bestScoreJsArray = JSON.parse(bestScoreJsonArray)
     const wallOfFame = document.getElementById('fame')
@@ -235,23 +217,16 @@ export default class Game {
     const startAgainButton = document.createElement('button')
     startAgainButton.innerHTML = "Nouvelle partie !"
     target.appendChild(startAgainButton)
-    
-    startAgainButton.addEventListener('click', ()=>{
-      
-    this.init(0); 
-    const boardContainer = document.getElementById("board-container");
-    boardContainer.style.display = "flex"  
 
-    const wallOfFame = document.getElementById('fame');
-    wallOfFame.innerHTML = ''
-  
-  
-  
-  })
+    startAgainButton.addEventListener('click', () => {
 
+      this.init(0);
+      const boardContainer = document.getElementById("board-container");
+      boardContainer.style.display = "flex"
 
-
-
+      const wallOfFame = document.getElementById('fame');
+      wallOfFame.innerHTML = ''
+    })
   }
 
 
@@ -263,9 +238,6 @@ export default class Game {
       data: { action: "addScore", score: this.score }
     })
   };
-
-
-
 }
 
 

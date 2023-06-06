@@ -1,7 +1,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
   function submitData() {
-
     $(document).ready(function() {
       let data = {
         name: $("#name").val(),
@@ -15,12 +14,10 @@
         type: 'post',
         data: data,
         success: function(response) {
-          //console.log(response);
           if (response == "Login Successful") {
             window.location.reload();
           } else if (response == "Registration Successful") {
             $(location).attr('href', 'login.php');
-            //console.log("coucou")
           } else if (response == response) {
             const message = document.getElementById("message")
             message.innerText = response
@@ -29,6 +26,4 @@
       });
     });
   }
-
-
 </script>

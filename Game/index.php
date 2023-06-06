@@ -1,15 +1,18 @@
 <?php
+
 $conn = mysqli_connect("localhost", "root", "", "motus");
+
 require 'ajaxMethods.php';
+
 if(isset($_SESSION["id"])){
   $id = $_SESSION["id"];
   $user = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM tb_user WHERE id = $id"));
-}
-else{
+}else{
   header("Location: login.php");
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
