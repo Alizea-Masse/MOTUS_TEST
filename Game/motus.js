@@ -1,26 +1,28 @@
-//import Fame from './Game/wallOfFame.js'
-
-
 export default class Game {
 
-  constructor(score) {
-   this.init(score)
+  constructor() {
+    this.boardContainer = document.getElementById("board-container");
+    this.board = document.getElementById("board");
+    this.fame = document.getElementById("fame");
+    this.init(0)
   }
 
- init(score){
-  this.user
-  this.score = score
-  this.running = true;
-  this.word = "";
-  this.position = 1;
-  this.round = 0;
-  this.letterArray;
-  this.board = document.getElementById("board");
-  this.board.innerHTML = "";
-  this.getWord().then((word)=>{this.word = word ; this.drawboard(); console.log(this.word)})
-  this.fame = document.getElementById("fame");
-  this.wall = []
- }
+  init(score) {
+    this.user
+    this.score = score
+    this.running = true;
+    this.word = "";
+    this.position = 1;
+    this.round = 0;
+    this.letterArray;
+    
+    
+    
+    this.board.innerHTML = "";
+    this.getWord().then((word) => { this.word = word; this.drawboard(); console.log(this.word) })
+    this.fame = document.getElementById("fame");
+    this.wall = []
+  }
 
 
   drawboard() {
@@ -47,7 +49,9 @@ export default class Game {
     this.generateLetterArray()
     this.writePoints()
     this.writeLetter(this.word[0], "goodPlace", "cell0-0");
-    
+
+    //this.getBestScore().then((wall)=>{this.wall = wall ;  this.drawFame()})
+
   }
 
 
@@ -59,7 +63,7 @@ export default class Game {
         LineCells.innerHTML = ""
       }
     }
-    
+
   }
 
   writeLetter(letter, className, id) {
@@ -113,7 +117,7 @@ export default class Game {
       this.lose()
       return
 
-    } 
+    }
     this.writePoints()
     for (let index = 0; index < this.letterArray.length; index++) {
       if (this.letterArray[index] == true) {
@@ -124,14 +128,14 @@ export default class Game {
   }
 
   getWord() {
-   return $.ajax({
+    return $.ajax({
       method: "POST",
       url: "ajaxMethods.php",
       data: { action: "getWord" },
-      success: function(word) {
+      success: function (word) {
         this.word = word
       }
-    }) 
+    })
 
   }
 
@@ -146,91 +150,109 @@ export default class Game {
       }, 500 * index)
     }
 
-    for (let index = this.round ; index < 6; index++) {
+    for (let index = this.round; index < 6; index++) {
       let emptyRows = document.getElementById(`row${index}`)
       let rowsChildren = emptyRows.children
-     
+
 
       for (let item of rowsChildren) {
         item.classList.add('empty')
 
       }
-      
+
       // le mot s'écrit sur toutes les lignes
-      
+
     }
     this.running = false
     setTimeout(() => {
       this.init(this.score + 1)
     }, 4000);
-    
+
   }
 
   lose() {
-
+    
     this.running = false
     this.submitScore()
     this.clearGame()
-    this.getBestScore().then((wall)=>{this.wall = wall ;  this.drawFame()})
-    
-    
+    setTimeout(() => {
+      this.getBestScore().then((wall) => { this.wall = wall; this.drawFame() })
+    }, 900);
+
+
 
   }
 
-  clearGame(){
+  clearGame() {
     setTimeout(() => {
-      const boardContainer = document.querySelector('.board-container')
-      boardContainer.innerHTML = ''
+      const boardContainer = document.getElementById('board-container')
+      boardContainer.style.display = "none"
     }, 500);
   }
 
 
   getBestScore() {
-    
+
     return $.ajax({
-       method: "POST",
-       url: "ajaxMethods.php",
-       data: { action: "getBestScore" },
+      method: "POST",
+      url: "ajaxMethods.php",
+      data: { action: "getBestScore" },
       //  success: function(wall) {
       //    this.wall = wall
       //  }
-     }) 
- 
-   }
+    })
 
-  drawFame(){
+  }
 
-// this.getBestScore()
- //console.log(this.wall)
+  drawFame() {
 
- const bestScoreJsonArray = this.wall
- const bestScoreJsArray = JSON.parse(bestScoreJsonArray)
- //console.log(bestScoreArray)
- //console.log(bestScoreJsArray)
+    const bestScoreJsonArray = this.wall
+    const bestScoreJsArray = JSON.parse(bestScoreJsonArray)
+    const wallOfFame = document.getElementById('fame')
+    const wallTitle = document.createElement('h1')
+    wallTitle.setAttribute('class', 'wall-title')
+    wallTitle.innerHTML = "Classement des meilleurs joueurs"
+    wallOfFame.appendChild(wallTitle)
+    const newTable = document.createElement("table");
+    newTable.setAttribute("id", "fame-table")
+    newTable.innerHTML = "<thead><th>Joueurs</th><th>Score</th></thead>";
 
- const newTable = document.createElement("table");
- newTable.innerHTML = "<thead><th>Player</th><th>Score</th></thead>";
+    for (let player of bestScoreJsArray) {
 
-for ( let player of bestScoreJsArray) {
-  //console.log(player)
-    const newRow = document.createElement("tr");
-    const tdPlayer = document.createElement("td");
-    const tdScore = document.createElement("td");
-    tdPlayer.textContent = player.username;
-    tdScore.textContent = player.best_score;    
-    newRow.appendChild(tdPlayer);
-    newRow.appendChild(tdScore);
-    newTable.appendChild(newRow);
-}
+      const newRow = document.createElement("tr");
+      const tdPlayer = document.createElement("td");
+      const tdScore = document.createElement("td");
+      tdPlayer.textContent = player.username.toUpperCase();
+      tdScore.textContent = player.best_score;
+      newRow.appendChild(tdPlayer);
+      newRow.appendChild(tdScore);
+      newTable.appendChild(newRow);
+    }
 
- const target = document.getElementById('fame');
- target.appendChild(newTable);
+    const target = document.getElementById('fame');
+    target.appendChild(newTable);
 
- 
-   
+    const startAgainButton = document.createElement('button')
+    startAgainButton.innerHTML = "Nouvelle partie !"
+    target.appendChild(startAgainButton)
+    
+    startAgainButton.addEventListener('click', ()=>{
+      
+    this.init(0); 
+    const boardContainer = document.getElementById("board-container");
+    boardContainer.style.display = "flex"  
+
+    const wallOfFame = document.getElementById('fame');
+    wallOfFame.innerHTML = ''
+  
+  
+  
+  })
 
 
-}
+
+
+  }
 
 
 
@@ -241,7 +263,7 @@ for ( let player of bestScoreJsArray) {
       data: { action: "addScore", score: this.score }
     })
   };
-  
+
 
 
 }

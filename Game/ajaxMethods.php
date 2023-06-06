@@ -18,6 +18,10 @@ function register()
   $name = $_POST["name"];
   $username = $_POST["username"];
   $password = $_POST["password"];
+  
+  $hashPassword = password_hash($password, PASSWORD_BCRYPT);
+
+
 
   if (empty($name) || empty($username) || empty($password)) {
     echo "Veuillez remplir tous les champs!";
@@ -30,7 +34,7 @@ function register()
     exit;
   }
 
-  $query = "INSERT INTO tb_user VALUES('', '$name', '$username', '$password')";
+  $query = "INSERT INTO tb_user VALUES('', '$name', '$username', '$hashPassword', '')";
   mysqli_query($conn, $query);
   echo "Registration Successful";
 }
@@ -42,14 +46,16 @@ function login()
 
   $username = $_POST["username"];
   $password = $_POST["password"];
+ 
+
 
   $user = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username'");
 
   if (mysqli_num_rows($user) > 0) {
 
     $row = mysqli_fetch_assoc($user);
-
-    if ($password == $row['password']) {
+    
+    if (password_verify( $password, $row['password'] )) {
       echo "Login Successful";
       $_SESSION["login"] = true;
       $_SESSION["id"] = $row["id"];

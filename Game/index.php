@@ -25,7 +25,7 @@ else{
           <a class="logout-link" href="logout.php">Se déconnecter</a>
         </div>
         
-        <div class="board-container">
+        <div id="board-container">
           <div class="rules-container">
   
           <h2 class="rules-title">Les lettres entourées :</h2>
