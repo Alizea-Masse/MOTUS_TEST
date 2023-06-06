@@ -4,19 +4,24 @@
 export default class Game {
 
   constructor(score) {
-    this.user
-    this.score = score
-    this.running = true;
-    this.word = "";
-    this.position = 1;
-    this.round = 0;
-    this.letterArray;
-    this.board = document.getElementById("board");
-    this.board.innerHTML = "";
-    this.getWord().then((word)=>{this.word = word ; this.drawboard()})
-    this.fame = document.getElementById("fame");
-    this.wall = []
+   this.init(score)
   }
+
+ init(score){
+  this.user
+  this.score = score
+  this.running = true;
+  this.word = "";
+  this.position = 1;
+  this.round = 0;
+  this.letterArray;
+  this.board = document.getElementById("board");
+  this.board.innerHTML = "";
+  this.getWord().then((word)=>{this.word = word ; this.drawboard(); console.log(this.word)})
+  this.fame = document.getElementById("fame");
+  this.wall = []
+ }
+
 
   drawboard() {
     this.board = document.getElementById("board");
@@ -42,6 +47,7 @@ export default class Game {
     this.generateLetterArray()
     this.writePoints()
     this.writeLetter(this.word[0], "goodPlace", "cell0-0");
+    
   }
 
 
@@ -53,6 +59,7 @@ export default class Game {
         LineCells.innerHTML = ""
       }
     }
+    
   }
 
   writeLetter(letter, className, id) {
@@ -95,8 +102,6 @@ export default class Game {
 
   newRound() {
     this.round++;
-    //console.log(position);
-   
     this.position = this.letterArray.indexOf(false);
 
     if (this.position === -1) {
@@ -156,16 +161,13 @@ export default class Game {
     }
     this.running = false
     setTimeout(() => {
-      
-      game = new Game(this.score + 1)
+      this.init(this.score + 1)
     }, 4000);
-   
+    
   }
 
   lose() {
 
-    const bestScore = this.score
-    //console.log(bestScore)
     this.running = false
     this.submitScore()
     this.clearGame()
@@ -199,62 +201,34 @@ export default class Game {
   drawFame(){
 
 // this.getBestScore()
- console.log(this.wall)
- 
+ //console.log(this.wall)
+
+ const bestScoreJsonArray = this.wall
+ const bestScoreJsArray = JSON.parse(bestScoreJsonArray)
+ //console.log(bestScoreArray)
+ //console.log(bestScoreJsArray)
+
+ const newTable = document.createElement("table");
+ newTable.innerHTML = "<thead><th>Player</th><th>Score</th></thead>";
+
+for ( let player of bestScoreJsArray) {
+  //console.log(player)
+    const newRow = document.createElement("tr");
+    const tdPlayer = document.createElement("td");
+    const tdScore = document.createElement("td");
+    tdPlayer.textContent = player.username;
+    tdScore.textContent = player.best_score;    
+    newRow.appendChild(tdPlayer);
+    newRow.appendChild(tdScore);
+    newTable.appendChild(newRow);
+}
+
+ const target = document.getElementById('fame');
+ target.appendChild(newTable);
+
  
    
-let table = document.createElement('table');
-let thead = document.createElement('thead');
-let tbody = document.createElement('tbody');
 
-table.appendChild(thead);
-table.appendChild(tbody);
-
-// Adding the entire table to the body tag
-document.getElementById('fame').appendChild(table);
-// Creating and adding data to first row of the table
-let row_1 = document.createElement('tr');
-let heading_1 = document.createElement('th');
-heading_1.innerHTML = "Place";
-let heading_2 = document.createElement('th');
-heading_2.innerHTML = "Nom";
-let heading_3 = document.createElement('th');
-heading_3.innerHTML = "Score";
-
-row_1.appendChild(heading_1);
-row_1.appendChild(heading_2);
-row_1.appendChild(heading_3);
-thead.appendChild(row_1);
-
-
-// Creating and adding data to second row of the table
-let row_2 = document.createElement('tr');
-let row_2_data_1 = document.createElement('td');
-row_2_data_1.innerHTML = "1.";
-let row_2_data_2 = document.createElement('td');
-row_2_data_2.innerHTML = "James Clerk";
-let row_2_data_3 = document.createElement('td');
-row_2_data_3.innerHTML = "Netflix";
-
-row_2.appendChild(row_2_data_1);
-row_2.appendChild(row_2_data_2);
-row_2.appendChild(row_2_data_3);
-tbody.appendChild(row_2);
-
-
-// Creating and adding data to third row of the table
-let row_3 = document.createElement('tr');
-let row_3_data_1 = document.createElement('td');
-row_3_data_1.innerHTML = "2.";
-let row_3_data_2 = document.createElement('td');
-row_3_data_2.innerHTML = "Adam White";
-let row_3_data_3 = document.createElement('td');
-row_3_data_3.innerHTML = "Microsoft";
-
-row_3.appendChild(row_3_data_1);
-row_3.appendChild(row_3_data_2);
-row_3.appendChild(row_3_data_3);
-tbody.appendChild(row_3);
 
 }
 
